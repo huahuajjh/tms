@@ -120,3 +120,8 @@ src/.vs/config/applicationhost.config
 
 # GitLink
 !GitLink.exe
+
+# 过滤 Web
+/src/web/assets/
+/src/web/node_modules/
+/src/web/.vscode/
