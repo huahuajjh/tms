@@ -1,0 +1,88 @@
+html {
+    background: #63bad8 url("../../image/bg.jpg") 50% 0px repeat-x;
+}
+
+body {
+    width: 410px;
+    margin: 0 auto;
+    margin-top: 10%;
+    padding: 0px;
+    font-family: "微软雅黑";
+}
+
+main {
+    width: 470px;
+    position: relative;
+    background-color: #fff;
+
+    > h1 {
+        background: #c5e6ea;
+        padding: 15px 0;
+        font-size: 15px;
+        margin: 0;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .darkbanner {
+        margin: 20px 0 0 -18px;
+        padding: 8px 10px 10px 40px;
+        background: #424242;
+        position: relative;
+        width: 430px;
+        font: bold 24px helvetica, arial, sans-serif;
+        color: #fff;
+        text-align: left;
+
+        &:after{
+            content: "";
+            display: block;
+            background: url("../../image/aiwrap.png");
+            width: 18px;
+            height: 10px;
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+        }
+    }
+
+    form {
+        border: 0;
+        margin: 0px;
+        display: block;
+        background-color: #fff;
+        padding: 20px;
+
+        p {
+            .loginlabel {
+                margin: 0;
+                float: left;
+                text-align: right;
+                width: 70px;
+                font-weight: normal;
+                margin-right: 10px;
+                padding-top: 6px;
+            }
+
+            .form-control {
+                width: 280px;
+                display: inline-block;
+            }
+
+            span {
+                display: none;
+                padding-left: 80px;
+                color: red;
+            }
+
+            &.error {
+                span {
+                    display: block;
+                }
+                .form-control {
+                    border: 1px solid red;
+                }
+            }
+        }
+    }
+}
