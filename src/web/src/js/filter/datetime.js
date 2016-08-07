@@ -46,20 +46,32 @@ function strDateTime(str) {
 }
 
 function datetime(value, format) {
-  var date = null;
+  value = value || "";
   if (value instanceof Date) {
     return formatFn.call(value, format);
   } else if (isTime(value)) {
     return value;
+  } else {
+    var date = stringToDate(value);
+    if(date != null) {
+      return formatFn.call(date, format);
+    }
+  }
+  return value;
+}
+
+export function stringToDate(value) {
+  if(/^[/]Date[(][0-9]*[)][/]$/.test(value)) {
+    value = value.replace("/Date(", "").replace(")/", "");
+    return new Date(parseInt(value));
   } else if (strDateTime(value) || strDateTime(value)) {
-    var date = new Date(value);
-    return formatFn.call(date, format);
+    return new Date(value);
   } else if (/^[0-9]+.?[0-9]*$/.test(value)) {
     var date = new Date();
     date.setTime(value * 1000);
-    return formatFn.call(date, format);
+    return date;
   }
-  return value;
+  return null;
 }
 
 export function install(Vue, option) {

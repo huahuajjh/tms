@@ -8,7 +8,28 @@ namespace ViewModel.Out
 {
     public class User : Entity.UserInfo
     {
+
         private Permission[] permissions = new Permission[0];
+
+        public string TypeStr 
+        {
+            get
+            {
+                switch (this.UserType)
+                {
+                    case 0:
+                        return "平台管理员";
+                    case 1:
+                        return "代理商";
+                    case 2:
+                        return "景点管理员";
+                    case 255:
+                        return "超级管理员";
+                    default:
+                        return "其他用户";
+                }
+            }
+        }
 
         public Permission[] Permissions
         {
@@ -35,6 +56,7 @@ namespace ViewModel.Out
             userInfo.RoleName = user.RoleName;
             userInfo.Title = user.Title;
             userInfo.StateId = user.StateId;
+            userInfo.UserType = user.UserType;
             if (menus != null)
             {
                 List<Permission> listData = new List<Permission>();
@@ -47,7 +69,6 @@ namespace ViewModel.Out
             return userInfo;
         }
 
-
         public static User EntityToModel(Entity.SuperUser user, Entity.Menu[] menus = null)
         {
             if (user == null) return null;
@@ -55,7 +76,7 @@ namespace ViewModel.Out
             userInfo.Account = user.Account;
             userInfo.Id = user.Id;
             userInfo.Name = "超级管理员";
-            userInfo.RoleName = "管理员";
+            userInfo.UserType = 255;
             if (menus != null)
             {
                 List<Permission> listData = new List<Permission>();

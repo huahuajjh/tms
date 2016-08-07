@@ -12,6 +12,10 @@
                         <div class="col-sm-9 tabular-border">{{userInfo.Account}}</div>
                     </div>
                     <div class="form-group">
+                        <label for="focusedinput" class="col-sm-3 text-right">账号类型</label>
+                        <div class="col-sm-9 tabular-border">{{userInfo.TypeStr}}</div>
+                    </div>
+                    <div class="form-group">
                         <label for="focusedinput" class="col-sm-3 text-right">性别</label>
                         <div class="col-sm-9 tabular-border">{{ userInfo.Gender === 1 ? "男" : "女" }}</div>
                     </div>

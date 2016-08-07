@@ -111,6 +111,9 @@
       },
       "sendError": {
         type: Function
+      },
+      uploadBefore: {
+        type: Function
       }
     },
     data: function (){
@@ -269,6 +272,9 @@
         }
       });
       uploader.on('startUpload', function(file, reason) {
+        if(typeof ths.uploadBefore === "function") {
+          ths.uploadBefore();
+        }
         ths.readonly = true;
         ths.uploadState = {
           isAgain: false,
@@ -287,17 +293,22 @@
         ths.uploadState.state = false;
         ths.uploadState.isAgain = true;
         if(typeof ths.sendError === "function") {
-          ths.sendError(reason);
+          ths.sendError();
         }
       });
       uploader.on('uploadSuccess', function(file, response) {
-        ths.uploadState.state = true;
-        ths.setUploadFile();
-        ths.initSelectFile();
-        ths.uploader.reset();
+        var state = true;
         if(typeof ths.sendSuccess === "function") {
-          ths.sendSuccess(response);
+          state = ths.sendSuccess(response) == false ? false : true;
         }
+        if(state) {
+          ths.uploadState.state = true;
+          ths.setUploadFile();
+          ths.uploader.reset();
+        } else {
+          ths.uploadState.state = false;
+        }
+        ths.initSelectFile();
       });
     }
   }

@@ -5,14 +5,14 @@
                 <div class="form-group" :class="{ 'has-error': !validation.model.Name.isChangePass }">
                     <label for="focusedinput" class="col-sm-3 control-label">角色名称 <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="请输入角色名称" v-model="role.Name">
+                        <input type="text" class="form-control" placeholder="请输入角色名称" v-model="role.Name" tabindex="1">
                     </div>
                     <p class="col-sm-8 col-sm-offset-3 text-danger mb0" v-if="!validation.model.Name.isChangePass">{{ validation.model.Name.message }}</p>
                 </div>
                 <div class="form-group">
                     <label for="focusedinput" class="col-sm-3 control-label">角色备注</label>
                     <div class="col-sm-8">
-                        <textarea rows="4" class="form-control" placeholder="请输入角色介绍" v-model="role.Remarks"></textarea>
+                        <textarea rows="4" class="form-control" placeholder="请输入角色介绍" v-model="role.Remarks" tabindex="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-block btn-primary" :disabled="!validation.isPass">保存</button>
+                <button type="submit" class="btn btn-block btn-purple" :disabled="!validation.isPass" tabindex="3">保存</button>
             </div>
         </form>
     </modal>
@@ -62,15 +62,11 @@
                 ajaxAlert("确定修改该角色信息?", "提示", ()=>{
                     var role = $.extend({}, self.role);
                     editRole(role, (msg)=> {
-                        setTimeout(()=>{
-                            self.visible = false;
-                            successAlert(msg);
-                            self.reload();
-                        }, 1000);
+                        self.visible = false;
+                        successAlert(msg);
+                        self.reload();
                     }, (msg)=>{
-                        setTimeout(()=>{
-                            errorAlert(msg);
-                        }, 1000);
+                        errorAlert(msg);
                     });
                 });
             },

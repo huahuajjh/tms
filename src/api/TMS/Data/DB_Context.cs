@@ -39,6 +39,9 @@ namespace Data
             modelBuilder.Configurations.Add(new UserSceneryConfiguration());
             modelBuilder.Configurations.Add(new UserStateConfiguration());
             modelBuilder.Configurations.Add(new UserInfoConfiguration());
+            modelBuilder.Configurations.Add(new TicketConfiguration());
+            modelBuilder.Configurations.Add(new TicketCodeConfiguration());
+            modelBuilder.Configurations.Add(new TicketInfoConfiguration());
         }
 
         public IQueryable<T> ExecuteStoredProcedure<T>(string query, params object[] parameters)

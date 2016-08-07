@@ -51,6 +51,9 @@
     <Compile Include="Mapping\RoleMenuConfiguration.cs" />
     <Compile Include="Mapping\SceneryConfiguration.cs" />
     <Compile Include="Mapping\SuperUserConfiguration.cs" />
+    <Compile Include="Mapping\TicketCodeConfiguration.cs" />
+    <Compile Include="Mapping\TicketConfiguration.cs" />
+    <Compile Include="Mapping\TicketInfoConfiguration.cs" />
     <Compile Include="Mapping\UserConfiguration.cs" />
     <Compile Include="Mapping\UserInfoConfiguration.cs" />
     <Compile Include="Mapping\UserSceneryConfiguration.cs" />

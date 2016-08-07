@@ -1,5 +1,3 @@
-require("./gritter.scss");
-
 /**
 * Big fat Gritter object
 * @constructor (not really since its object literal)

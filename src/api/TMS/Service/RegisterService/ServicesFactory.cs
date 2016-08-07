@@ -24,6 +24,7 @@ namespace Service.RegisterService
             _register.RegisteService<IRoleService, RoleService>();
             _register.RegisteService<IMenuService, MenuService>();
             _register.RegisteService<ISceneryService, SceneryService>();
+            _register.RegisteService<ITicketService, TicketService>();
         }
 
         /// <summary>

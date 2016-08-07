@@ -12,7 +12,7 @@ namespace Data.Mapping
         public UserInfoConfiguration(string schema = "dbo")
         {
             ToTable(schema + ".UserInfo");
-            HasKey(x => new { x.Id, x.Account, x.RoleId, x.Birthday, x.Gender, x.StateId, x.IsLogin });
+            HasKey(x => new { x.Id, x.Account, x.RoleId, x.Birthday, x.Gender, x.StateId, x.UserType });
 
             Property(x => x.Id).HasColumnName("Id").IsRequired();
             Property(x => x.Name).HasColumnName("Name").IsOptional().HasMaxLength(50);
@@ -29,7 +29,8 @@ namespace Data.Mapping
             Property(x => x.RoleName).HasColumnName("RoleName").IsOptional().HasMaxLength(50);
             Property(x => x.Remarks).HasColumnName("remarks").IsOptional().HasMaxLength(200);
             Property(x => x.Title).HasColumnName("Title").IsOptional().HasMaxLength(50);
-            Property(x => x.IsLogin).HasColumnName("IsLogin").IsRequired();
+            Property(x => x.IsLogin).HasColumnName("IsLogin").IsOptional();
+            Property(x => x.UserType).HasColumnName("UserType").IsRequired();
         }
     }
 }

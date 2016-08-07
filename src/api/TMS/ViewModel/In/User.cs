@@ -22,6 +22,7 @@ namespace ViewModel.In
             user.Qq = this.Qq;
             user.RoleId = this.RoleId;
             user.StateId = this.StateId;
+            user.Type = this.Type;
             return user;
         }
 
@@ -35,6 +36,7 @@ namespace ViewModel.In
             user.Phone = this.Phone;
             user.Qq = this.Qq;
             user.RoleId = this.RoleId;
+            user.Type = this.Type;
         }
     }
 }

@@ -6,7 +6,7 @@ var phoneOne = {
   //中国电信
   ce: /^(?:0?1)(?:33|53|8[079])\d{8}$/,
   //中国大陆
-  cn: /^(?:0?1)[3458]\d{9}$/
+  cn: /^1[3|4|5|7|8]\d{9}$/,
   //中国香港
   //   hk: /^(?:0?[1569])(?:\d{7}|\d{8}|\d{12})$/,
   //澳门
@@ -29,17 +29,18 @@ var ripv6 = /^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:
  * @return {boolean} 是否正确的时间格式
  */
 function isCorrectDate(value) {
-  if (typeof value === "string" && value) {                        //是字符串但不能是空字符
-    var arr = value.split("-"); //可以被-切成3份，并且第1个是4个字符
-    if (arr.length === 3 && arr[0].length === 4) {
-      var year = ~~arr[0] //全部转换为非负整数
-      var month = ~~arr[1] - 1
-      var date = ~~arr[2]
-      var d = new Date(year, month, date)
-      return d.getFullYear() === year && d.getMonth() === month && d.getDate() === date
-    }
-  }
-  return false
+  var reg = /^(\d+)(-|[/])(\d{1,2})(-|[/])(\d{1,2}) ((\d{1,2}):(\d{1,2}):(\d{1,2})|(\d{1,2}):(\d{1,2})|(\d{1,2}))?$/;
+     var r = (value || "").match(reg);
+     return r;
+    //  if(r==null)return false;
+    //  r[2]=r[2]-1;
+    //  var d= new Date(r[1], r[2],r[3], r[4],r[5]);
+    //  if(d.getFullYear()!=r[1])return false;
+    //  if(d.getMonth()!=r[2])return false;
+    //  if(d.getDate()!=r[3])return false;
+    //  if(d.getHours()!=r[4])return false;
+    //  if(d.getMinutes()!=r[5])return false;
+    //  return true;
 }
 
 /**
@@ -206,6 +207,7 @@ module.exports = {
   "maxlength": {
     message: '最多输入{{value}}个字',
     action: function (value = "", attrValue , next, dm) {
+      value = value || "";
       $(this).attr("maxlength", attrValue);
       var num = attrValue;
       next(value.length <= num);

@@ -1,14 +1,14 @@
 <template>
-    <modal title="景点详细" :visible.sync="visible">
+    <modal title="线路详细" :visible.sync="visible">
         <div class="panel-body">
             <form class="form-horizontal tabular-form">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="focusedinput" class="col-sm-3 text-right">景点名称</label>
+                        <label for="focusedinput" class="col-sm-3 text-right">线路名称</label>
                         <div class="col-sm-8 tabular-border">{{scenicInfo.Title}}</div>
                     </div>
                     <div class="form-group">
-                        <label for="focusedinput" class="col-sm-3 text-right">景点介绍</label>
+                        <label for="focusedinput" class="col-sm-3 text-right">线路介绍</label>
                         <div class="col-sm-9 tabular-border">{{scenicInfo.Remarks}}</div>
                     </div>
                     <div class="form-group">

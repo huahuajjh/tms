@@ -1,42 +1,42 @@
 <template>
-    <h2 class="sinfotit">维护景点 <a class=" btn btn-primary btn-label pull-right m20" href="javascript:;" @click="addInfo" v-if="action.add"><i class="fa fa-plus"></i> 新增景点</a></h2>
+    <h2 class="sinfotit">维护线路 <a class=" btn btn-purple btn-label pull-right m20" href="javascript:;" @click="addInfo" v-if="action.add"><i class="fa fa-plus"></i> 新增线路</a></h2>
     <div class="panel panel-default m20">
         <div class="panel-heading"></div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-3 form-group">
-                    <label for="focusedinput" class="control-label">模糊查询-景点名称</label>
-                    <input type="text" class="form-control" placeholder="请输入需要查询的景点名称" maxlength="15" v-model="name">
+                    <label for="focusedinput" class="control-label">模糊查询-线路名称</label>
+                    <input type="text" class="form-control" placeholder="请输入需要查询的线路名称" maxlength="15" v-model="name">
                 </div>
                 <div class="col-md-3 form-group">
-                    <label for="focusedinput" class="control-label">模糊查询-景点编号</label>
-                    <input type="text" class="form-control" placeholder="请输入需要查询的景点编号" maxlength="20" v-model="code">
+                    <label for="focusedinput" class="control-label">模糊查询-线路编号</label>
+                    <input type="text" class="form-control" placeholder="请输入需要查询的线路编号" maxlength="20" v-model="code">
                 </div>
                 <div class="col-md-3 form-group">
-                    <a href="javascript:;" class="btn btn-primary mt30" @click="queryInfo">查询</a>
+                    <a href="javascript:;" class="btn btn-purple mt30" @click="queryInfo">查询</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="panel panel-brown m20">
+    <div class="panel panel-toyo m20">
         <div class="panel-heading">
-            <h2>景点列表</h2>
+            <h2>线路列表</h2>
             <div class="panel-ctrls">
-                <button type="button" class="btn btn-sm btn-brown" v-on:click="reloadAsyncData" :disabled="$loadingAsyncData">
+                <label class="btn btn-sm" v-on:click="reloadAsyncData" :disabled="$loadingAsyncData">
                     <i class="fa fa-refresh"></i>
-                </button>
+                </label>
                 <div class="btn-group">
                     <div class="btn-check btn-check-sm">
                         <input type="radio" value="10" v-model="query.pageSize" number :disabled="$loadingAsyncData">
-                        <label class="btn btn-brown">10</label>
+                        <label class="btn">10</label>
                     </div>
                     <div class="btn-check btn-check-sm">
                         <input type="radio" value="30" v-model="query.pageSize" number :disabled="$loadingAsyncData">
-                        <label class="btn btn-brown">30</label>
+                        <label class="btn">30</label>
                     </div>
                     <div class="btn-check btn-check-sm">
                         <input type="radio" value="50" v-model="query.pageSize" number :disabled="$loadingAsyncData">
-                        <label class="btn btn-brown">50</label>
+                        <label class="btn">50</label>
                     </div>
                 </div>
             </div>
@@ -46,9 +46,9 @@
             <table class="table table-striped table-bordered m0">
                 <thead>
                     <tr>
-                        <th class="text-left">景点编号</th>
-                        <th class="text-left">景点名称</th>
-                        <th class="text-left">景点介绍</th>
+                        <th class="text-left">线路编号</th>
+                        <th class="text-left">线路名称</th>
+                        <th class="text-left">线路介绍</th>
                         <th style="width: 130px">操作</th>
                     </tr>
                 </thead>
@@ -134,7 +134,7 @@
             },
             delInfo(data) {
                 var self = this;
-                ajaxAlert("确定删除该景点,删除将会导致某些订单一起删除?", "提示", ()=>{
+                ajaxAlert("确定删除该线路,删除将会导致某些订单一起删除?", "提示", ()=>{
                     delScenic(data.Id, (msg)=> {
                         self.reload()();
                         successAlert(msg);

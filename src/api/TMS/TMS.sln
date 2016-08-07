@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{A5A24703
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{52C0B961-9D01-40CA-8C7D-8CB6DA3E453D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel", "Excel\Excel.csproj", "{79E4C92B-A18F-4F0F-8144-77D7652A6E96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{52C0B961-9D01-40CA-8C7D-8CB6DA3E453D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52C0B961-9D01-40CA-8C7D-8CB6DA3E453D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52C0B961-9D01-40CA-8C7D-8CB6DA3E453D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E4C92B-A18F-4F0F-8144-77D7652A6E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E4C92B-A18F-4F0F-8144-77D7652A6E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E4C92B-A18F-4F0F-8144-77D7652A6E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E4C92B-A18F-4F0F-8144-77D7652A6E96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -56,6 +56,7 @@ namespace Service
             Entity.SuperUser superUser = this.repository.GetReposirotyFactory<Entity.SuperUser>().Query(d => d.Account == userName).FirstOrDefault();
             if (superUser != null)
             {
+                superUser.Id = -1;
                 Entity.Menu[] array = this.repository.GetReposirotyFactory<Entity.Menu>().ArrayAll();
                 return ViewModel.Out.User.EntityToModel(superUser, array);
             }
@@ -144,17 +145,22 @@ namespace Service
 
         public ViewModel.PageModel<ViewModel.Out.UserInfo> list(ViewModel.In.Page page, ViewModel.In.UserQuery query)
         {
-            int pageCount;
-            ViewModel.Out.UserInfo[] userInfos = this.repository.GetReposirotyFactory<Entity.UserInfo>()
-                .QueryByPage(
-                    d => (d.Name.Contains(query.Name) && !string.IsNullOrEmpty(query.Name)) || 
-                        (!string.IsNullOrEmpty(query.Account) && d.Account.Contains(query.Account)) || 
-                        (string.IsNullOrEmpty(query.Account) && string.IsNullOrEmpty(query.Name)),
-                    d => d.Id,
-                    page.PageSize,
-                    page.PageIndex,
-                    out pageCount
-                ).ToList().Select(d=> ViewModel.Out.UserInfo.ToModel(d)).ToArray();
+            IQueryable<Entity.UserInfo> wheres = this.repository.GetReposirotyFactory<Entity.UserInfo>().Query(d => true);
+            if (!string.IsNullOrEmpty(query.Name))
+            {
+                wheres = wheres.Where(d => d.Name.Contains(query.Name));
+            }
+            if(!string.IsNullOrEmpty(query.Account))
+            {
+                wheres = wheres.Where(d => d.Account.Contains(query.Account));
+            }
+            if (query.Type != null)
+            {
+                wheres = wheres.Where(d => d.UserType == query.Type);
+            }
+            int pageCount = wheres.Count();
+            ViewModel.Out.UserInfo[] userInfos = wheres.OrderByDescending(d => d.Id).Skip((page.PageIndex - 1) * page.PageSize).Take(page.PageSize).ToList()
+                .Select(d => ViewModel.Out.UserInfo.ToModel(d)).ToArray();
             return new ViewModel.PageModel<ViewModel.Out.UserInfo>(pageCount, userInfos);
         }
 

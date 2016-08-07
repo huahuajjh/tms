@@ -1,5 +1,10 @@
+<style>
+    .block {
+        display: block;
+    }
+</style>
 <template>
-    <h2 class="sinfotit">用户维护 <a class=" btn btn-primary btn-label pull-right m20" href="javascript:;" @click="addInfo" v-if="action.add"><i class="fa fa-plus"></i> 新增用户</a></h2>
+    <h2 class="sinfotit">用户维护 <a class=" btn btn-purple btn-label pull-right m20" href="javascript:;" @click="addInfo" v-if="action.add"><i class="fa fa-plus"></i> 新增用户</a></h2>
     <div class="panel panel-default m20">
         <div class="panel-heading"></div>
         <div class="panel-body">
@@ -12,31 +17,57 @@
                     <label for="focusedinput" class="control-label">模糊查询-姓名</label>
                     <input type="text" class="form-control" placeholder="请输入需要查询的姓名" maxlength="20" v-model="name">
                 </div>
-                <div class="col-md-3 form-group">
-                    <a href="javascript:;" class="btn btn-primary mt30" @click="queryInfo">查询</a>
+                <div class="col-md-6 form-group">
+                    <label for="focusedinput" class="control-label">查询账号类型</label>
+                    <div class="block">
+                        <div class="btn-group">
+                            <div class="btn-check">
+                                <input type="radio" v-model="type" value="">
+                                <label class="btn btn-midnightblue">所有类型</label>
+                            </div>
+                            <div class="btn-check">
+                                <input type="radio" v-model="type" value="0">
+                                <label class="btn btn-midnightblue">管理员</label>
+                            </div>
+                            <div class="btn-check">
+                                <input type="radio" v-model="type" value="1">
+                                <label class="btn btn-midnightblue">代理商</label>
+                            </div>
+                            <div class="btn-check">
+                                <input type="radio" v-model="type" value="2">
+                                <label class="btn btn-midnightblue">景点管理员</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <hr>
+                </div>
+                <div class="col-md-2 col-md-offset-10">
+                    <a href="javascript:;" class="btn btn-purple btn-block" @click="queryInfo">查询</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="panel panel-brown m20">
+    <div class="panel panel-toyo m20">
         <div class="panel-heading">
             <h2>用户列表</h2>
             <div class="panel-ctrls">
-                <button type="button" class="btn btn-sm btn-brown" v-on:click="reloadAsyncData" :disabled="$loadingAsyncData">
+                <label type="button" class="btn btn-sm" v-on:click="reloadAsyncData" :disabled="$loadingAsyncData">
                     <i class="fa fa-refresh"></i>
-                </button>
+                </label>
                 <div class="btn-group">
                     <div class="btn-check btn-check-sm">
                         <input type="radio" value="10" v-model="query.pageSize" number :disabled="$loadingAsyncData">
-                        <label class="btn btn-brown">10</label>
+                        <label class="btn">10</label>
                     </div>
                     <div class="btn-check btn-check-sm">
                         <input type="radio" value="30" v-model="query.pageSize" number :disabled="$loadingAsyncData">
-                        <label class="btn btn-brown">30</label>
+                        <label class="btn">30</label>
                     </div>
                     <div class="btn-check btn-check-sm">
                         <input type="radio" value="50" v-model="query.pageSize" number :disabled="$loadingAsyncData">
-                        <label class="btn btn-brown">50</label>
+                        <label class="btn">50</label>
                     </div>
                 </div>
             </div>
@@ -60,7 +91,7 @@
                         <td>{{ data.Account }}</td>
                         <td>{{ data.Gender === 1 ? "男" : "女" }}</td>
                         <td>{{ data.IdCard }}</td>
-                        <td>{{ data.RoleName }}</td>
+                        <td>{{ data.TypeStr }}({{ data.RoleName }})</td>
                         <td>{{ data.Title }}</td>
                         <td class="text-center">
                             <a href="javascript:;" class="btn btn-primary-alt btn-xs mr10" v-tooltip.hover :tooltip-val="'查看'" v-on:click="showInfo(data)" v-if="action.see"><i class="fa fa-eye"></i></a>
@@ -104,9 +135,11 @@
                 currentPage: 1,
                 account: "",
                 name: "",
+                type: "",
                 query: {
                     account: "",
                     name: "",
+                    type: "",
                     pageIndex: 1,
                     pageSize: 10
                 },
@@ -125,6 +158,7 @@
                 this.query.pageIndex = 1;
                 this.query.account = this.account;
                 this.query.name = this.name;
+                this.query.type = this.type;
                 this.reload()();
             },
             reload(){
@@ -147,7 +181,7 @@
             },
             resetPassword(data) {
                 var self = this;
-                ajaxAlert("确定重置该用户的密码?", "提示", ()=>{
+                ajaxAlert("确定重置该用户的密码为'123456'?", "提示", ()=>{
                     resetPassword(data.Id, (msg)=> {
                         successAlert(msg);
                     }, (msg)=>{

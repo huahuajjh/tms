@@ -5,7 +5,7 @@ html, body {
 }
 body {
     background: url('../../image/main-bg.jpg') center no-repeat;
-    padding: 50px 100px;
+    padding: 20px 30px;
 }
 main {
     width: 100%;
@@ -17,7 +17,7 @@ main {
     padding-top: 54px;
 
     > header {
-        background: #3c4145;
+        background: #A76B00;
         padding: 5px 20px;
         height: 54px;
         position: absolute;
@@ -35,7 +35,7 @@ main {
             font-size: 10px;
             line-height: 40px;
             margin: 0;
-            color: #ccc;
+            color: #fff;
 
             span {
                 color: #7FB738;
@@ -53,7 +53,7 @@ main {
             strong {
                 font-size: 20px;
                 padding-right: 10px;
-                color: #0E799B;
+                color: #fff;
                 font-family: "幼圆";
             }
         }
@@ -65,7 +65,7 @@ main {
             font-size: 14px;
 
             span {
-                color: #6a7e85;
+                color: #eee;
                 margin: 0px 5px;
             }
 
@@ -75,10 +75,14 @@ main {
 
             a {
                 margin: 0px 5px;
-                color: #fb9d00;
+                color: #FBCD7A;
+
+                &:hover, &:focus {
+                    color: #fb9d00;
+                }
 
                 &.outsys {
-                    color: #6a7e85;
+                    color: #343434;
 
                     &:hover {
                         color: #c41411;
@@ -123,69 +127,78 @@ main {
                 float: left;
                 width: 150px;
                 height: 100%;
-                background: #30383b;
-                overflow-x: hidden;
-                overflow-y: auto;
+                background: #F49D01;
+                position: relative;
 
-                a {
-                    display: block;
-                    height: 48px;
-                    border-left: 4px solid #30383b;
-                    background: #30383b;
-                    color: #697d84;
-                    display: block;
-                    padding-left: 20px;
-                    line-height: 48px;
-
-                    &:hover, &.current {
-                        border-left: 4px solid #282d31;
-                        background: #282d31;
-                        color: #77b049;
-                    }
-                    &.current {
-                        border-left: 4px solid #77b049;
-                    }
-                }
-            }
-
-            dl {
-                float: left;
-                width: 199px;
-                height: 100%;
-                background: #e6e7e9;
-                border-left: 1px solid #D1D6D9;
-                margin: 0;
-                overflow-x: hidden;
-                overflow-y: auto;
-
-                dt {
-                    color: #117a9a;
-                    height: 60px;
-                    border-bottom: 1px solid #D1D6D9;
-                    font-size: 20px;
-                    line-height: 60px;
-                    padding-left: 20px;
-                    margin-bottom: 10px;
-                }
-
-                dd {
-
-                    a {
-                        height: 36px;
-                        border-left: 4px solid #e6e7e9;
-                        padding-left: 16px;
-                        color: #969897;
+                div {
+                    &:hover > dl {
                         display: block;
-                        line-height: 36px;
+                    }
 
-                        &:hover, &.current {
-                            border-left: 4px solid #d2d6d9;
-                            color: #107999;
-                            background: #d2d6d9;
-                        }
+                    &:hover > a, > a.current  {
+                        border-left: 4px solid #5A5A5A;
+                        background: #5A5A5A;
+                        color: #eee;
+                    }
+
+                    & > a {
+                        display: block;
+                        height: 48px;
+                        border-left: 4px solid #F49D01;
+                        background: #F49D01;
+                        color: #fff;
+                        display: block;
+                        padding-left: 20px;
+                        line-height: 48px;
 
                         &.current {
-                            border-left: 4px solid #107999;
+                            border-left: 4px solid #FCD036;
+                        }
+                    }
+
+                    dl {
+                        float: left;
+                        width: 199px;
+                        height: 100%;
+                        background: #e6e7e9;
+                        border-left: 1px solid #D1D6D9;
+                        margin: 0;
+                        position: absolute;
+                        z-index: 1;
+                        top: 0;
+                        left: 100%;
+                        box-shadow: 1px 1px 5px grey;
+
+                        dt {
+                            color: #5C5C5C;
+                            height: 60px;
+                            border-bottom: 1px solid #D1D6D9;
+                            font-size: 20px;
+                            line-height: 60px;
+                            padding-left: 20px;
+                            margin-bottom: 10px;
+                        }
+
+                        dd {
+
+                            a {
+                                height: 36px;
+                                border-left: 4px solid #e6e7e9;
+                                padding-left: 16px;
+                                color: #969897;
+                                display: block;
+                                line-height: 36px;
+
+                                &:hover, &.current {
+                                    border-left: 4px solid #d2d6d9;
+                                    color: #fff;
+                                    background: #d2d6d9;
+                                }
+
+                                &.current {
+                                    border-left: 4px solid #5A5A5A;
+                                }
+                            }
                         }
                     }
                 }

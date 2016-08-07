@@ -22,6 +22,8 @@ namespace Entity
         public string RoleName { get; set; } // RoleName
         public string Remarks { get; set; } // remarks
         public string Title { get; set; } // Title
-        public bool IsLogin { get; set; } // IsLogin
+        public bool? IsLogin { get; set; } // IsLogin
+
+        public byte UserType { get; set; } // UserType
     }
 }

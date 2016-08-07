@@ -1,29 +1,30 @@
 <template>
-    <modal title="修改景点详细" :visible.sync="visible" :static="true">
+    <modal title="修改线路详细" :visible.sync="visible" :static="true">
         <form class="form-horizontal" v-validation @success="formSuccess">
             <div class="modal-body">
                 <div class="form-group" :class="{ 'has-error': !validation.model.Title.isChangePass }">
-                    <label class="col-sm-3 control-label">景点名称 <span class="text-danger">*</span></label>
+                    <label class="col-sm-3 control-label">线路名称 <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="请输入姓名" v-model="scenic.Title">
+                        <input type="text" class="form-control" placeholder="请输入姓名" v-model="scenic.Title" tabindex="1">
                     </div>
                     <p class="col-sm-8 col-sm-offset-3 text-danger mb0" v-if="!validation.model.Title.isChangePass">{{ validation.model.Title.message }}</p>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">景点介绍</label>
+                <div class="form-group" :class="{ 'has-error': !validation.model.Remarks.isChangePass }">
+                    <label class="col-sm-3 control-label">线路介绍</label>
                     <div class="col-sm-8">
-                        <textarea rows="4" class="form-control" v-model="scenic.Remarks"></textarea>
+                        <textarea rows="4" class="form-control" v-model="scenic.Remarks" placeholder="请输入线路介绍" tabindex="2"></textarea>
                     </div>
+                    <p class="col-sm-8 col-sm-offset-3 text-danger mb0" v-if="!validation.model.Remarks.isChangePass">{{ validation.model.Remarks.message }}</p>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">景区管理人员</label>
+                    <label class="col-sm-3 control-label">线路管理人员</label>
                     <div class="col-sm-8">
                         <select-person v-ref:select-dom :select-fn="selectUser"></select-person>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-block btn-primary" :disabled="!validation.isPass">保存</button>
+                <button type="submit" class="btn btn-block btn-purple" :disabled="!validation.isPass" tabindex="3">保存</button>
             </div>
         </form>
     </modal>
@@ -42,13 +43,16 @@
                     required: true,
                     chsNumeric: true,
                     maxlength: 20
+                },
+                Remarks: {
+                    maxlength: 200
                 }
             }
         },
         methods: {
             formSuccess() {
                 var self = this;
-                ajaxAlert("确定修改该景点信息?", "提示", ()=>{
+                ajaxAlert("确定修改该线路信息?", "提示", ()=>{
                     editScenic(self.scenic, (msg)=> {
                         self.visible = false;
                         successAlert(msg);

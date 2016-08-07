@@ -5,13 +5,34 @@
                 <div class="panel-heading"></div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <label for="focusedinput" class="control-label">模糊查询-账号</label>
                             <input type="text" class="form-control" placeholder="请输入需要查询的账号" maxlength="15" v-model="account">
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <label for="focusedinput" class="control-label">模糊查询-姓名</label>
                             <input type="text" class="form-control" placeholder="请输入需要查询的姓名" maxlength="20" v-model="name">
+                        </div>
+                        <div class="col-md-7">
+                            <label for="focusedinput" class="control-label">查询账号类型</label>
+                            <div class="btn-group">
+                                <div class="btn-check">
+                                    <input type="radio" v-model="type" value="">
+                                    <label class="btn btn-midnightblue">所有类型</label>
+                                </div>
+                                <div class="btn-check">
+                                    <input type="radio" v-model="type" value="0">
+                                    <label class="btn btn-midnightblue">管理员</label>
+                                </div>
+                                <div class="btn-check">
+                                    <input type="radio" v-model="type" value="1">
+                                    <label class="btn btn-midnightblue">代理商</label>
+                                </div>
+                                <div class="btn-check">
+                                    <input type="radio" v-model="type" value="2">
+                                    <label class="btn btn-midnightblue">景点管理员</label>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-2">
                             <a href="javascript:;" class="btn btn-primary mt30" @click="queryInfo">查询</a>
@@ -80,7 +101,9 @@
                 totalItems: 0,
                 account: "",
                 name: "",
+                type: "",
                 query: {
+                    type: "",
                     account: "",
                     name: "",
                     pageIndex: 1,
@@ -93,6 +116,7 @@
                 this.query.pageIndex = 1;
                 this.query.account = this.account;
                 this.query.name = this.name;
+                this.query.type = this.type;
                 this.reloadAsyncData();
             }
         },

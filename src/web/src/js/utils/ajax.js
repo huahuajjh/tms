@@ -1,4 +1,5 @@
 var Promise = require('mmPromise');
+$.support.cors = true;
 // 初始化属性
 function initData (option, setting, data, dataType) {
   if (data) {

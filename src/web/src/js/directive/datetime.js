@@ -585,10 +585,23 @@ export function install(Vue, option) {
     Vue.directive('datetime', {
         params: ['minDatetime', "maxDatetime", "formatDatetime"],
         bind() {
-            let selfEl = this.el;
+            let self = this;
+            let setVal = (()=>{
+                let expression = self.expression;
+                if(expression) {
+                    return (value)=>{
+                        self.vm.$set(expression, value);
+                    }
+                }
+                let selfEl = self.el;
+                return (value)=>{
+                    $(selfEl).val(value);
+                }
+            })()
             let datetime = new Datetime(this.el, {
                 change() {
-                    $(selfEl).val(this.getDateTime());
+                    // $(selfEl).val(this.getDateTime());
+                    setVal(this.getDateTime());
                 },
                 isTodayBtn: this.modifiers.today,
                 format: this.params.formatDatetime || "yyyy/MM/dd HH:mm:ss",

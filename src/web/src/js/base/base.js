@@ -1,6 +1,8 @@
 require("../../style/sass/style.scss");
 require("../../style/font/css/font-awesome.css");
 require("../../components/tree/css/css.scss");
+require("../../components/calendar/calendar.scss");
+require("../../js/lib/gritter/gritter.scss");
 
 Vue.config.silent = true;
 

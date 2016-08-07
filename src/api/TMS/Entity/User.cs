@@ -19,5 +19,6 @@ namespace Entity
         public string Phone { get; set; } // Phone
         public string IdCard { get; set; } // IdCard
         public int StateId { get; set; } // StateId
+        public byte Type { get; set; } // Type
     }
 }

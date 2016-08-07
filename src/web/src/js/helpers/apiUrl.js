@@ -109,3 +109,53 @@ export const scenery = {
         type: "POST"
     }
 }
+
+export const ticket = {
+    add: {
+        url: "/ticket/add",
+        type: "POST"
+    },
+    list: {
+        url: "/ticket/list",
+        type: "POST",
+        dataType: "json"
+    },
+    del: {
+        url: "/ticket/del",
+        type: "POST"
+    },
+    edit: {
+        url: "/ticket/edit",
+        type: "POST"
+    },
+    audit: {
+        url: "/ticket/audit",
+        type: "POST"
+    },
+    untakenList: {
+        url: "/ticket/untakenList",
+        type: "POST",
+        dataType: "json"
+    },
+    taken: {
+        url: "/ticket/taken",
+        type: "POST"
+    },
+    sendSMS: {
+        url: "/ticket/sendSMS",
+        type: "POST"
+    }
+}
+
+export const excel = {
+    scenery: {
+        import: "/excelFile/importScenery.xls",
+        export: "/excel/exportScenery",
+        upload: "/excel/importScenery"
+    },
+    ticket: {
+        import: "/excelFile/importTicket.xls",
+        export: "/excel/exportTicket",
+        upload: "/excel/importTicket"
+    }
+}

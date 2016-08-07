@@ -45,12 +45,17 @@
     <Compile Include="RegisterService\ServicesRegister.cs" />
     <Compile Include="RoleService.cs" />
     <Compile Include="SceneryService.cs" />
+    <Compile Include="TicketService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{3cf421b8-1785-49da-85d6-83902865ee0b}</Project>
       <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Excel\Excel.csproj">
+      <Project>{79e4c92b-a18f-4f0f-8144-77d7652a6e96}</Project>
+      <Name>Excel</Name>
     </ProjectReference>
     <ProjectReference Include="..\IRepository\IRepository.csproj">
       <Project>{15f92ca3-7aa4-48cf-8c96-0f7fc3e2cfe2}</Project>

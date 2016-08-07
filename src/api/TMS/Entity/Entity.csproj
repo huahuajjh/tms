@@ -45,6 +45,9 @@
     <Compile Include="RoleMenu.cs" />
     <Compile Include="Scenery.cs" />
     <Compile Include="SuperUser.cs" />
+    <Compile Include="Ticket.cs" />
+    <Compile Include="TicketCode.cs" />
+    <Compile Include="TicketInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="UserScenery.cs" />

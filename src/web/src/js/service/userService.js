@@ -13,13 +13,12 @@ export function login (data, successCallback, errorCallback) {
         userName: data.userName,
         password: data.userPassword
     }).success((sessionId)=>{
-        setTimeout(function() {
-            userCookie.set(sessionId);
-        }, 0);
+        userCookie.set(sessionId);
         if ($.isFunction(successCallback)) {
             successCallback("登录成功");
         }
-    }).error(()=>{
+    }).error((e,a,c)=>{
+        console.log(e);
         if ($.isFunction(errorCallback)) {
             errorCallback("用户名不存在或者密码不正确");
         }

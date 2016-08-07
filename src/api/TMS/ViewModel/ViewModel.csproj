@@ -39,15 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="In\AuditTicket.cs" />
     <Compile Include="In\Login.cs" />
     <Compile Include="In\Page.cs" />
     <Compile Include="In\Role.cs" />
     <Compile Include="In\Scenery.cs" />
     <Compile Include="In\SceneryQuery.cs" />
+    <Compile Include="In\TakenTicket.cs" />
+    <Compile Include="In\Ticket.cs" />
+    <Compile Include="In\TicketQuery.cs" />
     <Compile Include="In\User.cs" />
     <Compile Include="In\UserQuery.cs" />
     <Compile Include="Out\RoleInfo.cs" />
     <Compile Include="Out\Scenery.cs" />
+    <Compile Include="Out\TakenTicket.cs" />
+    <Compile Include="Out\Ticket.cs" />
     <Compile Include="Out\User.cs" />
     <Compile Include="OperationState.cs" />
     <Compile Include="Out\Permission.cs" />

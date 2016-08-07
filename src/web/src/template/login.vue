@@ -1,20 +1,20 @@
 <template>
     <main>
-        <h1>约游约呗大学生旅游</h1>
+        <h1>约游约呗-大学生旅游</h1>
         <div class="darkbanner">门票管理系统</div>
         <form v-validation @success="formSuccess">
             <p :class="{ 'error': !validation.model.userName.isChangePass }">
                 <label class="loginlabel" for="user_name">用户名:</label>
-                <input type="text" class="form-control" v-model="user.userName" :disabled="isDisabled" />
+                <input type="text" class="form-control" v-model="user.userName" :disabled="isDisabled" tabindex="1" autofocus />
                 <span>{{validation.model.userName.message}}</span>
             </p>
             <p :class="{ 'error': !validation.model.userPassword.isChangePass }">
                 <label class="loginlabel" for="user_password">密码:</label>
-                <input type="password" class="form-control" v-model="user.userPassword" :disabled="isDisabled" />
+                <input type="password" class="form-control" v-model="user.userPassword" :disabled="isDisabled" tabindex="2" />
                 <span>{{validation.model.userPassword.message}}</span>
             </p>
             <p class="ml50 mr50 pt20 mb0">
-                <button type="submit" class="btn btn-block btn-primary" :disabled="!(validation.isPass && !isDisabled)">
+                <button type="submit" class="btn btn-block btn-orange" :disabled="!(validation.isPass && !isDisabled)" tabindex="3">
                     {{ isDisabled ? "正在登录..." : "登录" }}
                 </button>
             </p>

@@ -59,6 +59,8 @@
     <Compile Include="Helper\Vilidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializeHelper\SerializeHelper.cs" />
+    <Compile Include="SerializeHelper\SerialNumberUtil.cs" />
+    <Compile Include="SMS\Action.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

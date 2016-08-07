@@ -99,7 +99,7 @@ app.use(serve(staticDir, {
 
 app = http.createServer(app.callback())
 
-app.listen(pkg.localServer.port, '192.168.1.5', () => {
+app.listen(pkg.localServer.port, 'localhost', () => {
     let url = util.format('http://%s:%d', 'localhost', pkg.localServer.port)
 
     console.log('Listening at %s', url)

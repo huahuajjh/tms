@@ -1,5 +1,13 @@
 html {
-    background: #63bad8 url("../../image/bg.jpg") 50% 0px repeat-x;
+    FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#71848B,endColorStr=#BCD0D7); /*IE 6 7 8*/ 
+    // background: -ms-linear-gradient(top, #71848B,  #BCD0D7);        /* IE 10 */
+    // background:-moz-linear-gradient(top,#71848B,#BCD0D7);/*火狐*/ 
+    // background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#71848B), to(#BCD0D7));/*谷歌*/ 
+    // background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#71848B), to(#BCD0D7));      /* Safari 4-5, Chrome 1-9*/
+    // background: -webkit-linear-gradient(top, #71848B, #BCD0D7);   /*Safari5.1 Chrome 10+*/
+    // background: -o-linear-gradient(top, #71848B, #BCD0D7);  /*Opera 11.10+*/
+    background-color: #BCD0D7;
+    height: 100%;
 }
 
 body {
@@ -16,7 +24,7 @@ main {
     background-color: #fff;
 
     > h1 {
-        background: #c5e6ea;
+        background: #FFCD76;
         padding: 15px 0;
         font-size: 15px;
         margin: 0;
@@ -27,7 +35,7 @@ main {
     .darkbanner {
         margin: 20px 0 0 -18px;
         padding: 8px 10px 10px 40px;
-        background: #424242;
+        background: #FFAA11;
         position: relative;
         width: 430px;
         font: bold 24px helvetica, arial, sans-serif;

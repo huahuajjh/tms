@@ -1,24 +1,24 @@
 <template>
-    <h2 class="sinfotit">角色维护 <a class=" btn btn-primary btn-label pull-right m20" href="javascript:;" @click="addInfo" v-if="action.add"><i class="fa fa-plus"></i> 新增角色</a></h2>
-    <div class="panel panel-brown m20">
+    <h2 class="sinfotit">角色维护 <a class=" btn btn-purple btn-label pull-right m20" href="javascript:;" @click="addInfo" v-if="action.add"><i class="fa fa-plus"></i> 新增角色</a></h2>
+    <div class="panel panel-toyo m20">
         <div class="panel-heading">
             <h2>角色列表</h2>
             <div class="panel-ctrls">
-                <button type="button" class="btn btn-sm btn-brown" v-on:click="reloadAsyncData" :disabled="$loadingAsyncData">
+                <label type="button" class="btn btn-sm" v-on:click="reloadAsyncData" :disabled="$loadingAsyncData">
                     <i class="fa fa-refresh"></i>
-                </button>
+                </label>
                 <div class="btn-group">
                     <div class="btn-check btn-check-sm">
                         <input type="radio" value="10" v-model="query.pageSize" number :disabled="$loadingAsyncData">
-                        <label class="btn btn-brown">10</label>
+                        <label class="btn">10</label>
                     </div>
                     <div class="btn-check btn-check-sm">
                         <input type="radio" value="30" v-model="query.pageSize" number :disabled="$loadingAsyncData">
-                        <label class="btn btn-brown">30</label>
+                        <label class="btn">30</label>
                     </div>
                     <div class="btn-check btn-check-sm">
                         <input type="radio" value="50" v-model="query.pageSize" number :disabled="$loadingAsyncData">
-                        <label class="btn btn-brown">50</label>
+                        <label class="btn">50</label>
                     </div>
                 </div>
             </div>

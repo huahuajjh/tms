@@ -27,6 +27,7 @@ namespace Data.Mapping
             Property(x => x.Phone).HasColumnName("Phone").IsOptional().HasMaxLength(50);
             Property(x => x.IdCard).HasColumnName("IdCard").IsOptional().HasMaxLength(50);
             Property(x => x.StateId).HasColumnName("StateId").IsRequired();
+            Property(x => x.Type).HasColumnName("Type").IsRequired();
         }
     }
 }

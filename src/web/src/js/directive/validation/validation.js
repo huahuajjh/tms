@@ -36,6 +36,9 @@ function Validation(form, vm, validationObj, validationVM, doms, success, error)
     validationVM.validateAll = ()=>{
       validate.validateAll()
     }
+    validationVM.initChangeTrue = ()=>{
+      validate.initChangeTrue()
+    }
     var baseAttrName = validationObj.baseAttrName || ''
     var validationModel = validationObj.model || {}
     var validationMssage = validationObj.message || {}
@@ -67,16 +70,14 @@ function Validation(form, vm, validationObj, validationVM, doms, success, error)
         return check._isPass;
       },
       set(value){
-        setTimeout(function () {
-          var state = true
-          $.each(directiveModels, function (i, v) {
-            if (!v.check.isPass) {
-              state = false
-            }
-          })
-          vm.isPass = state;
-        }, 0);
         check._isPass = value;
+        var state = true
+        $.each(directiveModels, function (i, v) {
+          if (!v.check.isPass) {
+            state = false
+          }
+        })
+        vm.isPass = state;
       }
     });
     Object.defineProperty(check, "isChange", {
@@ -84,16 +85,14 @@ function Validation(form, vm, validationObj, validationVM, doms, success, error)
         return check._isChange;
       },
       set(value){
-        setTimeout(function () {
-          var state = false
-          $.each(directiveModels, function (i, v) {
-            if (v.check.isChange) {
-              state = true
-            }
-          })
-          vm.isChange = state;
-        }, 0);
         check._isChange = value;
+        var state = false
+        $.each(directiveModels, function (i, v) {
+          if (v.check.isChange) {
+            state = true
+          }
+        })
+        vm.isChange = state;
       }
     });
   }
@@ -104,6 +103,14 @@ Validation.prototype = {
     $.each(this.directiveModels, function (i, v) {
       v.reset = true
       v.setVal(v.oldVal)
+    })
+  },
+  // 初始化控件更改状态
+  initChangeTrue: function () {
+    $.each(this.directiveModels, function (i, v) {
+      setTimeout(function() {
+        v.initChangeTrue();
+      }, 0);
     })
   },
   // 初始化控件默认数据
@@ -150,7 +157,7 @@ function DirectiveModel(vm, model, modelMessage, expression, check, doms) {
   this.expression = expression
   this.check = check
   this.oldVal = null
-  this.reset = false
+  this.value = this.vm.$get(this.expression)
 
   // 初始化
   init(this)
@@ -170,16 +177,17 @@ function DirectiveModel(vm, model, modelMessage, expression, check, doms) {
     dm.initChange()
     // 内容改变的时候进行验证
     dm.vm.$watch(dm.expression, function (newVal) {
-      setTimeout(function () {
-        dm.validate(dm.reset)
-        dm.reset = false
-      }, 0)
-      return newVal
+      dm.value = newVal;
+      dm.validate()
     })
     dm.validate(true)
   }
 }
 DirectiveModel.prototype = {
+  initChangeTrue: function (){
+    this.check.isChangePass = true
+    this.check.message = ''
+  },
   // 验证成功调用的方法
   success: function () {
     this.check.isChangePass = true
@@ -214,7 +222,7 @@ DirectiveModel.prototype = {
   },
   // 获取数据
   getVal: function () {
-    return this.vm.$get(this.expression)
+    return this.value;
   },
   // 初始化更改状态
   initChangeState: function () {

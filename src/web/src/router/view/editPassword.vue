@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-block btn-primary" :disabled="!validation.isPass">应用</button>
+                <button type="submit" class="btn btn-block btn-inverse" :disabled="!validation.isPass">应用</button>
             </div>
         </form>
     </modal>

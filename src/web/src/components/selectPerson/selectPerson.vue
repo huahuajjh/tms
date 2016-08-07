@@ -3,7 +3,7 @@
         height: auto !important;
         min-height: 32px !important;
         padding-bottom: 0px !important;
-        padding: 6px 6px 5px !important;
+        padding: 0 !important;
     }
     .tokenfield .token {
         -webkit-box-sizing: border-box;
@@ -81,7 +81,7 @@
                 var state = false;
                 if(!data) state = true;
                 for(var i = 0, selData; (selData = this.selectDatas[i++]) && !state;) {
-                    if(selData.id === data.id) {
+                    if(selData.Id === data.Id) {
                         state = true;
                     }
                 }

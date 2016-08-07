@@ -10,5 +10,7 @@ namespace ViewModel.In
         public string Name { get; set; }
 
         public string Account { get; set; }
+
+        public byte? Type { get; set; }
     }
 }

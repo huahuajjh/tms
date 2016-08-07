@@ -11,7 +11,7 @@
                     <div>
                         <div class="btn-group">
                             <div class="btn-check" v-for="val in stateList">
-                                <input type="radio" :value="val.Id" v-model="state">
+                                <input type="radio" :value="val.Id" v-model="state" tabindex="1">
                                 <label class="btn btn-midnightblue-alt">{{val.Title}}</label>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-block btn-primary" :disabled="!validation.isPass">应用</button>
+                <button type="submit" class="btn btn-block btn-inverse" :disabled="!validation.isPass" tabindex="2">应用</button>
             </div>
         </form>
     </modal>

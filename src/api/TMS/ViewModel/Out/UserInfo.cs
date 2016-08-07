@@ -7,6 +7,26 @@ namespace ViewModel.Out
 {
     public class UserInfo : Entity.UserInfo
     {
+        public string TypeStr
+        {
+            get
+            {
+                switch (this.UserType)
+                {
+                    case 0:
+                        return "平台管理员";
+                    case 1:
+                        return "代理商";
+                    case 2:
+                        return "景点管理员";
+                    case 255:
+                        return "超级管理员";
+                    default:
+                        return "其他用户";
+                }
+            }
+        }
+
         public static UserInfo ToModel(Entity.UserInfo userInfo)
         {
             UserInfo info = new UserInfo();
@@ -26,6 +46,7 @@ namespace ViewModel.Out
             info.RoleName = userInfo.RoleName;
             info.StateId = userInfo.StateId;
             info.Title = userInfo.Title;
+            info.UserType = userInfo.UserType;
             return info;
         }
     }
