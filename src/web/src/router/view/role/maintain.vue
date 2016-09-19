@@ -1,8 +1,8 @@
 <template>
-    <h2 class="sinfotit">角色维护 <a class=" btn btn-purple btn-label pull-right m20" href="javascript:;" @click="addInfo" v-if="action.add"><i class="fa fa-plus"></i> 新增角色</a></h2>
+    <h2 class="sinfotit">权限管理 <a class=" btn btn-purple btn-label pull-right m20" href="javascript:;" @click="addInfo" v-if="action.add"><i class="fa fa-plus"></i> 新增权限</a></h2>
     <div class="panel panel-toyo m20">
         <div class="panel-heading">
-            <h2>角色列表</h2>
+            <h2>权限列表</h2>
             <div class="panel-ctrls">
                 <label type="button" class="btn btn-sm" v-on:click="reloadAsyncData" :disabled="$loadingAsyncData">
                     <i class="fa fa-refresh"></i>
@@ -27,8 +27,8 @@
             <table class="table table-striped table-bordered m0">
                 <thead>
                     <tr>
-                        <th class="text-left">角色名称</th>
-                        <th class="text-left">角色介绍</th>
+                        <th class="text-left">权限名称</th>
+                        <th class="text-left">权限介绍</th>
                         <th style="width: 130px">操作</th>
                     </tr>
                 </thead>
@@ -48,7 +48,7 @@
                         <td colspan="3" class="text-right">
                             <page-temp
                                 :total-items="dataCount"
-                                :current-page="currentPage"
+                                :current-page.sync="query.pageIndex"
                                 :per-pages="query.pageSize"
                                 :change="reloadAsyncData"></page-temp>
                         </td>
@@ -72,7 +72,6 @@
             return {
                 dataList: [],
                 dataCount: 0,
-                currentPage: 1,
                 query: {
                     pageIndex: 1,
                     pageSize: 10
@@ -103,7 +102,7 @@
             },
             delInfo(data) {
                 var self = this;
-                ajaxAlert("确定删除角色?", "提示", ()=>{
+                ajaxAlert("确定删除权限?", "提示", ()=>{
                     delRole({
                         id: data.Id
                     }, (msg)=> {

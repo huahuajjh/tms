@@ -26,6 +26,11 @@ namespace Library.SMS
             return NotCodeContent.Replace("{{name}}", name).Replace("{{ticket}}", ticket);
         }
 
+        public static string ToContext(string context)
+        {
+            return context + "回T退订";
+        }
+
         public static bool Send(string mobile, string content)
         {
             string postStrTpl = "account={0}&pswd={1}&mobile={2}&msg={3}&needstatus=true&product=&extno=";

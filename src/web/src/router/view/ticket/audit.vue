@@ -30,6 +30,10 @@
                     <input type="text" class="form-control" placeholder="请输入需要查询的线路名称" maxlength="15" v-model="queryData.SceneryName">
                 </div>
                 <div class="col-md-3 form-group">
+                    <label for="focusedinput" class="control-label">指定审核人</label>
+                    <select-person v-ref:select-dom :select-fn="selectUser"></select-person>
+                </div>
+                <div class="col-md-3 form-group">
                     <label for="focusedinput" class="control-label">付款状态</label>
                     <div class="block">
                         <div class="btn-group">
@@ -83,23 +87,16 @@
                     <tr>
                         <th class="text-centext">
                             审核 <br>
-                            <div class="btn-group" style="width: 210px;">
-                                <div class="btn-check">
-                                    <input type="radio" v-model="auditAll" value="0">
-                                    <label class="btn btn-teal btn-sm">未审核</label>
-                                </div>
-                                <div class="btn-check">
-                                    <input type="radio" v-model="auditAll" value="1">
-                                    <label class="btn btn-teal btn-sm">通过审核</label>
-                                </div>
-                                <div class="btn-check">
-                                    <input type="radio" v-model="auditAll" value="2">
-                                    <label class="btn btn-teal btn-sm">未通过审核</label>
-                                </div>
-                            </div>
+                            <label><input type="radio" v-model="auditAll" value="0"> 未审核</label>
+                            <label class="ml5 mr5"><input type="radio" v-model="auditAll" value="1"> 通过审核</label>
+                            <label><input type="radio" v-model="auditAll" value="2"> 未通过审核</label>
                         </th>
-                        <th class="text-center mb10">
-                            是否产生验证码 <br> <input type="checkbox" v-model="checkCodeAll" @change="isCheckCodeAll">
+                        <th class="text-left mb10">
+                            是否产生验证码
+                            <br>
+                            <label><input type="radio" v-model="checkCodeAll" value="0"> 无验证码</label>
+                            <label class="ml5 mr5"><input type="radio" v-model="checkCodeAll" value="1"> 有验证码</label>
+                            <label><input type="radio" v-model="checkCodeAll" value="2"> 自定义发送短信</label>
                         </th>
                         <th class="text-left">支付状态</th>
                         <th class="text-left">游玩线路</th>
@@ -117,35 +114,31 @@
                 </thead>
                 <tbody v-for="data in dataList">
                     <tr>
-                        <td class="text-center">
-                            <div class="btn-group" style="width: 210px;">
-                                <div class="btn-check">
-                                    <input type="radio" v-model="data.State" value="0" @change="isCheckAudit">
-                                    <label class="btn btn-teal btn-sm">未审核</label>
-                                </div>
-                                <div class="btn-check">
-                                    <input type="radio" v-model="data.State" value="1" @change="isCheckAudit">
-                                    <label class="btn btn-teal btn-sm">通过审核</label>
-                                </div>
-                                <div class="btn-check">
-                                    <input type="radio" v-model="data.State" value="2" @change="isCheckAudit">
-                                    <label class="btn btn-teal btn-sm">未通过审核</label>
-                                </div>
+                        <td class="text-center info">
+                            <div class="form-control-static">
+                                <label><input type="radio" v-model="data.State" value="0" @change="isCheckAudit"> 未审核</label>
+                                <label class="ml5 mr5"><input type="radio" v-model="data.State" value="1" @change="isCheckAudit"> 通过审核</label>
+                                <label><input type="radio" v-model="data.State" value="2" @change="isCheckAudit"> 未通过审核</label>
                             </div>
                         </td>
-                        <td class="text-center"><input type="checkbox" v-model="data.IsCode" @change="isCheckCode"></td>
-                        <td>{{ data.IsPayStr }}</td>
-                        <td>{{ data.SceneryTitle }}</td>
-                        <td>{{ data.Name }}</td>
-                        <td>{{ data.GenderStr }}</td>
-                        <td>{{ data.Phone }}</td>
-                        <td>{{ data.IdCard }}</td>
-                        <td>{{ data.PlayTime | datetime "yyyy/MM/dd hh:mm" }}</td>
-                        <td>{{ data.BuyNumber }}</td>
-                        <td>{{ data.Community }}</td>
-                        <td>{{ data.Unit }}</td>
-                        <td>{{ data.Recommender }}</td>
-                        <td>{{ data.Remarks }}</td>
+                        <td class="info">
+                            <label><input type="radio" v-model="data.IsCode" value="0" @change="isCheckCode"> 无验证码</label>
+                            <label class="ml5 mr5"><input type="radio" v-model="data.IsCode" value="1" @change="isCheckCode"> 有验证码</label>
+                            <label><input type="radio" v-model="data.IsCode" value="2" @change="isCheckCode"> 自定义发送短信</label>
+                            <input v-if="data.IsCode == 2" type="text" class="form-control" v-model="data.SMSContext" maxlength="200" placeholder="请输入短信内容" style="display: inline-block; width: 180px;">
+                        </td>
+                        <td><div class="form-control-static">{{ data.IsPayStr }}</div></td>
+                        <td><div class="form-control-static">{{ data.SceneryTitle }}</div></td>
+                        <td><div class="form-control-static">{{ data.Name }}</div></td>
+                        <td><div class="form-control-static">{{ data.GenderStr }}</div></td>
+                        <td><div class="form-control-static">{{ data.Phone }}</div></td>
+                        <td><div class="form-control-static">{{ data.IdCard }}</div></td>
+                        <td><div class="form-control-static">{{ data.PlayTime | datetime "yyyy/MM/dd" }}</div></td>
+                        <td><div class="form-control-static">{{ data.BuyNumber }}</div></td>
+                        <td><div class="form-control-static">{{ data.Community }}</div></td>
+                        <td><div class="form-control-static">{{ data.Unit }}</div></td>
+                        <td><div class="form-control-static">{{ data.Recommender }}</div></td>
+                        <td><div class="form-control-static">{{ data.Remarks }}</div></td>
                     </tr>
                     <tr>
                         <td colspan="14" v-if="data.CreateUserAccount">
@@ -174,7 +167,7 @@
                                 <div class="col-sm-9 col-xs-9">
                                     <page-temp
                                         :total-items="dataCount"
-                                        :current-page="currentPage"
+                                        :current-page.sync="query.pageIndex"
                                         :per-pages="query.pageSize"
                                         :change="reloadAsyncData"></page-temp>
                                 </div>
@@ -195,10 +188,9 @@
         data() {
             return {
                 auditAll: "0",
-                checkCodeAll: false,
+                checkCodeAll: "0",
                 dataList: [],
                 dataCount: 0,
-                currentPage: 1,
                 queryData: {
                     Phone: "",
                     IdCard: "",
@@ -208,6 +200,7 @@
                     IsPay: ""
                 },
                 query: {
+                    CreateIds: "",
                     Phone: "",
                     IdCard: "",
                     PlayTime: "",
@@ -225,11 +218,17 @@
                 for(var i = 0, data; data = this.dataList[i++];){
                     data.State = value;
                 }
+            },
+            checkCodeAll(value) {
+                for(var i = 0, data; data = this.dataList[i++];){
+                    data.IsCode = value;
+                }
             }
         },
         components: {
             pageTemp: require("../../../components/page/page.vue"),
-            infoModal: require("./info.vue")
+            infoModal: require("./info.vue"),
+            selectPerson: require("../../../components/selectPerson/selectPerson.vue")
         },
         methods: {
             queryInfo(){
@@ -251,8 +250,9 @@
                             Id: data.Id,
                             State: data.State,
                             StateMsg: data.StateMsg,
-                            IsStateCode: data.IsCode ? true : false,
-                            StateUserId: this.$global.user.Id > 0 ? this.$global.user.Id : null
+                            IsStateCode: data.IsCode,
+                            StateUserId: this.$global.user.Id > 0 ? this.$global.user.Id : null,
+                            SMSContext: data.SMSContext
                         });
                     }
                 }
@@ -299,23 +299,36 @@
             isCheckCode() {
                 var self = this;
                 setTimeout(function() {
-                    var state = true;
+                    var not = true;
+                    var pass = true;
+                    var notPass = true;
                     for(var i = 0, data; data = self.dataList[i++];){
-                        if(!data.IsCode) {
-                            state = false;
-                            break;
+                        if(data.IsCode == "0") {
+                            pass = false;
+                            notPass = false;
+                        } else if(data.IsCode == "1") {
+                            not = false;
+                            notPass = false;
+                        } else if(data.IsCode == "2") {
+                            not = false;
+                            pass = false;
                         }
                     }
-                    self.checkCodeAll = state;
-                }, 0);
-            },
-            isCheckCodeAll() {
-                var self = this;
-                setTimeout(function() {
-                    for(var i = 0, data; data = self.dataList[i++];){
-                        data.IsCode = self.checkCodeAll;
+                    if(not) {
+                        self.checkCodeAll = "0";
+                    } else if(pass) {
+                        self.checkCodeAll = "1";
+                    } else if(notPass) {
+                        self.checkCodeAll = "2";
                     }
                 }, 0);
+            },
+            selectUser(datas) {
+                var ids = [];
+                for(var i = 0, item; item = datas[i++];) {
+                    ids.push(item.Id);
+                }
+                this.$set("query.CreateIds", ids.join(","));
             }
         },
         asyncData(resolve, reject){

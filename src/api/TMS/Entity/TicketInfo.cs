@@ -42,6 +42,7 @@ namespace Entity
         public string CreateQq { get; set; } // CreateQQ
         public string CreateMail { get; set; } // CreateMail
         public string CreatePhone { get; set; } // CreatePhone
-        public bool? IsCode { get; set; } // IsCode
+        public byte? IsCode { get; set; } // IsCode
+        public string SmsContext { get; set; } // SMSContext
     }
 }

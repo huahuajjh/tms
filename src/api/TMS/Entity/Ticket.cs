@@ -29,6 +29,6 @@ namespace Entity
         public DateTime CreateTime { get; set; } // CreateTime
         public bool IsDel { get; set; } // IsDel
         public int TakeNum { get; set; } // TakeNum
-        public bool? IsCode { get; set; } // IsCode
+        public byte? IsCode { get; set; } // IsCode
     }
 }

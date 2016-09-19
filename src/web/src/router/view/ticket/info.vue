@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group form-group-info">
                         <label for="focusedinput" class="col-sm-3 text-right">游玩时间</label>
-                        <div class="col-sm-9 tabular-border">{{info.PlayTime | datetime "yyyy/MM/dd hh:mm"}}</div>
+                        <div class="col-sm-9 tabular-border">{{info.PlayTime | datetime "yyyy/MM/dd"}}</div>
                     </div>
                     <div class="form-group form-group-info">
                         <label for="focusedinput" class="col-sm-3 text-right">购票数量</label>

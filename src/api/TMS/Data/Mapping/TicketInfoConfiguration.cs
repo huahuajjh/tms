@@ -50,6 +50,7 @@ namespace Data.Mapping
             Property(x => x.CreateMail).HasColumnName("CreateMail").IsOptional().HasMaxLength(50);
             Property(x => x.CreatePhone).HasColumnName("CreatePhone").IsOptional().HasMaxLength(50);
             Property(x => x.IsCode).HasColumnName("IsCode").IsOptional();
+            Property(x => x.SmsContext).HasColumnName("SMSContext").IsOptional().HasMaxLength(200);
         }
     }
 }

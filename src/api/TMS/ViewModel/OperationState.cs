@@ -7,6 +7,8 @@ namespace ViewModel
 {
     public enum OperationState
     {
+        // 重复数据
+        repeatData,
         //用户名错误
         userNameError,
         // 密码错误

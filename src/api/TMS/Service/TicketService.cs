@@ -18,6 +18,8 @@ namespace Service
 
         public ViewModel.OperationState Add(ViewModel.In.Ticket ticket)
         {
+            if (this.repository.GetReposirotyFactory<Entity.Ticket>().Query(d => d.PlayDate == ticket.PlayTime && d.SceneryId == ticket.SceneryId && d.IdCard == ticket.IdCard && d.IsDel == false).Any())
+                return ViewModel.OperationState.repeatData;
             this.repository.GetReposirotyFactory<Entity.Ticket>().Add(ticket.ToAddEntity());
             if (this.repository.SaveChange() > 0)
                 return ViewModel.OperationState.success;
@@ -85,6 +87,19 @@ namespace Service
             {
                 wheres = wheres.Where(d => d.UserId == query.CreateUserId);
             }
+            if (!string.IsNullOrEmpty(query.IdCard))
+            {
+                wheres = wheres.Where(d => d.IdCard == query.IdCard);
+            }
+            if (!string.IsNullOrEmpty(query.CreateIds))
+            {
+                string[] idsStrs = query.CreateIds.Trim().Split(',');
+                int?[] ids = idsStrs.Select(d => { int i; return int.TryParse(d, out i) ? i : -1; }).Where(d => d >= 0).Select(d => (int?)d).ToArray();
+                if (ids.Length > 0)
+                {
+                    wheres = wheres.Where(d => ids.Contains(d.UserId));
+                }
+            }
             int pageCount = wheres.Count();
             ViewModel.Out.Ticket[] dataArr = wheres.OrderByDescending(d => d.Id).Skip((page.PageIndex - 1) * page.PageSize).Take(page.PageSize).ToList().Select(d => ViewModel.Out.Ticket.ToModel(d)).ToArray();
             return new ViewModel.PageModel<ViewModel.Out.Ticket>(pageCount, dataArr);
@@ -92,7 +107,8 @@ namespace Service
 
         public ViewModel.OperationState Del(int id)
         {
-            this.repository.GetReposirotyFactory<Entity.Ticket>().Query(d => d.Id == id).ToList().ForEach(d => d.IsDel = true);
+            this.repository.GetReposirotyFactory<Entity.Ticket>().Delete(d => d.Id == id);
+            //this.repository.GetReposirotyFactory<Entity.Ticket>().Query(d => d.Id == id).ToList().ForEach(d => d.IsDel = true);
             if (this.repository.SaveChange() > 0)
                 return ViewModel.OperationState.success;
             return ViewModel.OperationState.dataError;
@@ -132,7 +148,7 @@ namespace Service
                                 codeEntity.Phone = d.Phone;
                                 codeEntity.PlayDate = d.PlayDate;
                                 codeEntity.SceneryId = d.SceneryId;
-                                codeEntity.Code = audit.IsStateCode ? Library.SerializeHelper.SerialNumberUtil.ToSerialNumber(long.Parse(d.Phone + d.Id.ToString())) : null;
+                                codeEntity.Code = audit.IsStateCode == 1 ? Library.SerializeHelper.SerialNumberUtil.ToSerialNumber(long.Parse(d.Phone + d.Id.ToString())) : null;
                                 codeEntity.State = 0;
                                 codeEntity.IsCode = audit.IsStateCode;
                                 this.repository.GetReposirotyFactory<Entity.TicketCode>().Add(codeEntity);
@@ -146,10 +162,12 @@ namespace Service
                                     string sceneryName = this.repository.GetReposirotyFactory<Entity.Scenery>().Query(t => t.Id == d.SceneryId).Select(t => t.Title).FirstOrDefault();
                                     if (sceneryName == null) sceneryName = "";
                                     string context = "";
-                                    if (codeEntity.IsCode)
+                                    if (codeEntity.IsCode == 1)
                                         context = Library.SMS.Action.ToContext(d.Name, sceneryName, codeEntity.Code);
-                                    else
+                                    else if(codeEntity.IsCode == 0)
                                         context = Library.SMS.Action.ToContext(d.Name, sceneryName);
+                                    else
+                                        context = codeEntity.SmsContext = Library.SMS.Action.ToContext(audit.SMSContext);
                                     codeModel.Add(key, new KeyValuePair<string, Entity.TicketCode>(context, codeEntity));
                                 }
                             }
@@ -226,10 +244,12 @@ namespace Service
                         Entity.TicketCode codeEntity = this.repository.GetReposirotyFactory<Entity.TicketCode>()
                             .Query(t => t.SceneryId == d.SceneryId && t.Phone == d.Phone && t.PlayDate == d.PlayDate && t.IsCode == d.IsCode).FirstOrDefault();
                         string context = "";
-                        if (codeEntity.IsCode)
+                        if (codeEntity.IsCode == 1)
                             context = Library.SMS.Action.ToContext(d.Name, d.SceneryTitle, codeEntity.Code);
-                        else
+                        else if(codeEntity.IsCode == 0)
                             context = Library.SMS.Action.ToContext(d.Name, d.SceneryTitle);
+                        else
+                            context = d.SmsContext;
                         codeModel.Add(key, new KeyValuePair<string, Entity.TicketCode>(context, codeEntity));
                     }
                 });
@@ -254,10 +274,14 @@ namespace Service
         {
             List<Excel.In.Ticket> repeatList = new List<Excel.In.Ticket>();
             IList<Entity.Ticket> ticketList = new List<Entity.Ticket>();
+            List<string> repeatData = new List<string>();
             foreach (var ticket in tickets)
             {
+                string repeatKey = ticket.PlayTime.ToString("yyyy/MM/dd") + ticket.SceneryId.ToString() + ticket.IdCard;
+                if (repeatData.Contains(repeatKey)) { repeatList.Add(ticket); continue; }
+                repeatData.Add(repeatKey);
                 ticket.UserId = userId;
-                if(this.repository.GetReposirotyFactory<Entity.Ticket>().Query(d=> d.PlayDate == ticket.PlayTime && d.SceneryId == ticket.SceneryId && d.Phone == ticket.Phone).Any())
+                if (this.repository.GetReposirotyFactory<Entity.Ticket>().Query(d => d.PlayDate == ticket.PlayTime && d.SceneryId == ticket.SceneryId && d.IdCard == ticket.IdCard && d.IsDel == false).Any())
                 {
                     repeatList.Add(ticket);
                 }

@@ -13,8 +13,10 @@ namespace ViewModel.In
 
         public string StateMsg { get; set; }
 
-        public bool IsStateCode { get; set; }
+        public byte IsStateCode { get; set; }
 
         public int? StateUserId { get; set; }
+
+        public string SMSContext { get; set; }
     }
 }

@@ -163,6 +163,23 @@
                 }
             }
         },
+        watch:{
+            "user.IdCard"(newVal) {
+                if(newVal.length === 15) {
+                    if(newVal[14] % 2 == 0) {
+                        this.user.Gender = 0;
+                    } else {
+                        this.user.Gender = 1;
+                    }
+                } else if(newVal.length === 18) {
+                    if(newVal[16] % 2 == 0) {
+                        this.user.Gender = 0;
+                    } else {
+                        this.user.Gender = 1;
+                    }
+                }
+            }
+        },
         methods: {
             formSuccess() {
                 var self = this;

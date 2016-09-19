@@ -22,6 +22,7 @@ namespace Data.Mapping
             Property(x => x.Code).HasColumnName("Code").IsOptional().HasMaxLength(50);
             Property(x => x.State).HasColumnName("State").IsRequired();
             Property(x => x.IsCode).HasColumnName("IsCode").IsRequired();
+            Property(x => x.SmsContext).HasColumnName("SMSContext").IsOptional().HasMaxLength(200);
         }
     }
 }

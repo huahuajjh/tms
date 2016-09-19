@@ -86,7 +86,7 @@
                         <td>{{ data.Name }}</td>
                         <td>{{ data.Phone }}</td>
                         <td>{{ data.IdCard }}</td>
-                        <td>{{ data.PlayTime | datetime "yyyy/MM/dd hh:mm" }}</td>
+                        <td>{{ data.PlayTime | datetime "yyyy/MM/dd" }}</td>
                         <td>{{ data.BuyNumber }}</td>
                         <td>{{ data.SceneryTitle }}</td>
                         <td>{{ data.TakeStateStr }}</td>
@@ -100,12 +100,12 @@
                         <td colspan="9" class="text-center">请查询数据</td>
                     </tr>
                 </tbody>
-                <tfoot v-if="dataList && dataList.length > 0">
+                <tfoot v-show="dataList && dataList.length > 0">
                     <tr>
                         <td colspan="9" class="text-right">
                             <page-temp
                                 :total-items="dataCount"
-                                :current-page="currentPage"
+                                :current-page.sync="query.pageIndex"
                                 :per-pages="query.pageSize"
                                 :change="reloadAsyncData"></page-temp>
                         </td>
@@ -125,7 +125,6 @@
             return {
                 dataList: [],
                 dataCount: 0,
-                currentPage: 1,
                 queryData: {
                     Code: "",
                     Phone: "",
@@ -174,6 +173,7 @@
                 return;
             }
             listTicket(this.query, (data) => {
+                console.log(data);
                 let tData = {
                     dataList: data.Datas,
                     dataCount: data.PageCount

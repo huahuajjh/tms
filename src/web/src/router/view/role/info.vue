@@ -1,18 +1,18 @@
 <template>
-    <modal title="角色详细" :visible.sync="visible">
+    <modal title="权限详细" :visible.sync="visible">
         <div class="panel-body">
             <form class="form-horizontal tabular-form">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="focusedinput" class="col-sm-3 text-right">角色名称</label>
+                        <label for="focusedinput" class="col-sm-3 text-right">权限名称</label>
                         <div class="col-sm-8 tabular-border">{{roleInfo.Name}}</div>
                     </div>
                     <div class="form-group">
-                        <label for="focusedinput" class="col-sm-3 text-right">角色介绍</label>
+                        <label for="focusedinput" class="col-sm-3 text-right">权限介绍</label>
                         <div class="col-sm-8 tabular-border">{{roleInfo.Remarks}}</div>
                     </div>
                     <div class="form-group">
-                        <label for="focusedinput" class="col-sm-3 text-right">角色权限</label>
+                        <label for="focusedinput" class="col-sm-3 text-right">权限权限</label>
                         <div class="col-sm-9 tabular-border">
                             <div class="jstree">
                                 <ul class="jstree-container-ul">

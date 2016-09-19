@@ -49,7 +49,7 @@
                 <div class="form-group" :class="{ 'has-error': !validation.model.PlayTime.isChangePass }">
                     <label for="focusedinput" class="col-sm-3 control-label">游玩时间 <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="请输入游玩时间" tabindex="6" v-model="ticket.PlayTime" v-datetime="ticket.PlayTime" formatDatetime="yyyy/MM/dd hh:mm:ss">
+                        <input type="text" class="form-control" placeholder="请输入游玩时间" tabindex="6" v-model="ticket.PlayTime" v-datetime="ticket.PlayTime" format-datetime="yyyy/MM/dd">
                     </div>
                     <p class="col-sm-8 col-sm-offset-3 text-danger mb0" v-if="!validation.model.PlayTime.isChangePass">{{ validation.model.PlayTime.message }}</p>
                 </div>
@@ -167,6 +167,23 @@
                 }
             }
         },
+        watch:{
+            "ticket.IdCard"(newVal) {
+                if((newVal || "").length === 15) {
+                    if(newVal[14] % 2 == 0) {
+                        this.ticket.Gender = "0";
+                    } else {
+                        this.ticket.Gender = "1";
+                    }
+                } else if((newVal || "").length === 18) {
+                    if(newVal[16] % 2 == 0) {
+                        this.ticket.Gender = "0";
+                    } else {
+                        this.ticket.Gender = "1";
+                    }
+                }
+            }
+        },
         methods: {
             formSuccess() {
                 var self = this;
@@ -176,7 +193,9 @@
                         self.reload();
                         successAlert(msg);
                         self.$set("scenic", {});
-                        self.$set("ticket", {});
+                        self.$set("ticket", {
+                            Gender: null
+                        });
                         self.$set("ticket.UserId", self.$global.user.Id > 0 ? self.$global.user.Id : null);
                         self.validation.initChangeTrue();
                     }, (msg)=>{
@@ -197,7 +216,9 @@
             return {
                 visible: false,
                 scenic: {},
-                ticket: {}
+                ticket: {
+                    Gender: null
+                }
             };
         },
         components: {

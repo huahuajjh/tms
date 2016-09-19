@@ -69,8 +69,8 @@
                             <page-temp
                                 :total-items="totalItems"
                                 :show-pages="10"
-                                :current-page="1"
-                                :per-pages="perPages"
+                                :current-page.sync="query.pageIndex"
+                                :per-pages="query.pageSize"
                                 :change="reloadAsyncData"></page-temp>
                         </td>
                     </tr>
@@ -97,7 +97,6 @@
         data() {
             return {
                 datas: [],
-                perPages: 10,
                 totalItems: 0,
                 account: "",
                 name: "",
@@ -107,7 +106,7 @@
                     account: "",
                     name: "",
                     pageIndex: 1,
-                    pageSize: 30
+                    pageSize: 10
                 }
             };
         },

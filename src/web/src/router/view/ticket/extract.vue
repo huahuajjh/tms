@@ -53,7 +53,7 @@
                         <td>{{ data.IdCard }}</td>
                         <td>{{ data.GenderStr }}</td>
                         <td>{{ data.SceneryTitle }}</td>
-                        <td>{{ data.PlayTime | datetime "yyyy/MM/dd hh:mm" }}</td>
+                        <td>{{ data.PlayTime | datetime "yyyy/MM/dd" }}</td>
                         <td class="text-center">
                             <a href="javascript:;" class="btn btn-primary-alt btn-xs mr10" v-tooltip.hover :tooltip-val="'取出订单'" v-on:click="takenInfo(data)" v-if="data.IsProcess"><i class="fa fa-external-link"></i></a>
                         </td>

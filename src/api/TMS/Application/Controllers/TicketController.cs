@@ -22,6 +22,10 @@ namespace Application.Controllers
             {
                 return new HttpStatusCodeResult(200);
             }
+            else if(state == ViewModel.OperationState.repeatData)
+            {
+                return new HttpStatusCodeResult(406);
+            }
             return new HttpStatusCodeResult(412);
         }
 

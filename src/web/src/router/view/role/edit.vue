@@ -1,22 +1,22 @@
 <template>
-    <modal title="修改角色" :visible.sync="visible" :static="true">
+    <modal title="修改权限" :visible.sync="visible" :static="true">
         <form class="form-horizontal" v-validation @success="formSuccess">
             <div class="modal-body">
                 <div class="form-group" :class="{ 'has-error': !validation.model.Name.isChangePass }">
-                    <label for="focusedinput" class="col-sm-3 control-label">角色名称 <span class="text-danger">*</span></label>
+                    <label for="focusedinput" class="col-sm-3 control-label">权限名称 <span class="text-danger">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="请输入角色名称" v-model="role.Name" tabindex="1">
+                        <input type="text" class="form-control" placeholder="请输入权限名称" v-model="role.Name" tabindex="1">
                     </div>
                     <p class="col-sm-8 col-sm-offset-3 text-danger mb0" v-if="!validation.model.Name.isChangePass">{{ validation.model.Name.message }}</p>
                 </div>
                 <div class="form-group">
-                    <label for="focusedinput" class="col-sm-3 control-label">角色备注</label>
+                    <label for="focusedinput" class="col-sm-3 control-label">权限备注</label>
                     <div class="col-sm-8">
-                        <textarea rows="4" class="form-control" placeholder="请输入角色介绍" v-model="role.Remarks" tabindex="2"></textarea>
+                        <textarea rows="4" class="form-control" placeholder="请输入权限介绍" v-model="role.Remarks" tabindex="2"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="focusedinput" class="col-sm-3 control-label">角色权限</label>
+                    <label for="focusedinput" class="col-sm-3 control-label">权限权限</label>
                     <div class="col-sm-9">
                         <permission v-ref:permission-dom :check-fn="initCheck"></permission>
                     </div>
@@ -59,7 +59,7 @@
         methods: {
             formSuccess() {
                 var self = this;
-                ajaxAlert("确定修改该角色信息?", "提示", ()=>{
+                ajaxAlert("确定修改该权限信息?", "提示", ()=>{
                     var role = $.extend({}, self.role);
                     editRole(role, (msg)=> {
                         self.visible = false;

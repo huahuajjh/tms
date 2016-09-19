@@ -109,7 +109,7 @@
                         <td>{{ data.IdCard }}</td>
                         <td>{{ data.GenderStr }}</td>
                         <td>{{ data.SceneryTitle }}</td>
-                        <td>{{ data.PlayTime | datetime "yyyy/MM/dd hh:mm" }}</td>
+                        <td>{{ data.PlayTime | datetime "yyyy/MM/dd" }}</td>
                         <td>{{ data.SMSStateStr }}</td>
                     </tr>
                 </tbody>
@@ -119,7 +119,7 @@
                             <button type="button" class="btn btn-success m10 pull-left" @click="send">发送短信</button>
                             <page-temp
                                 :total-items="dataCount"
-                                :current-page="currentPage"
+                                :current-page.sync="query.pageIndex"
                                 :per-pages="query.pageSize"
                                 :change="reloadAsyncData"></page-temp>
                         </td>
@@ -139,7 +139,6 @@
             return {
                 dataList: [],
                 dataCount: 0,
-                currentPage: 1,
                 queryData: {
                     Code: "",
                     Phone: "",

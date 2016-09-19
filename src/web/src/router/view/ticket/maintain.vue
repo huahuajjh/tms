@@ -151,7 +151,7 @@
                         <td>{{ data.Name }}</td>
                         <td>{{ data.Phone }}</td>
                         <td>{{ data.IdCard }}</td>
-                        <td>{{ data.PlayTime | datetime "yyyy/MM/dd hh:mm" }}</td>
+                        <td>{{ data.PlayTime | datetime "yyyy/MM/dd" }}</td>
                         <td>{{ data.BuyNumber }}</td>
                         <td>{{ data.SceneryTitle }}</td>
                         <td>{{ data.StateStr }}</td>
@@ -169,7 +169,7 @@
                         <td colspan="10" class="text-right">
                             <page-temp
                                 :total-items="dataCount"
-                                :current-page="currentPage"
+                                :current-page.sync="query.pageIndex"
                                 :per-pages="query.pageSize"
                                 :change="reloadAsyncData"></page-temp>
                         </td>
@@ -196,7 +196,6 @@
             return {
                 dataList: [],
                 dataCount: 0,
-                currentPage: 1,
                 queryData: {
                     Code: "",
                     Phone: "",

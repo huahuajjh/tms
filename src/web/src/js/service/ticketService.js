@@ -7,8 +7,10 @@ export function addTicket(data, successCallback, errorCallback) {
         if ($.isFunction(successCallback)) {
             successCallback("新增门票成功");
         }
-    }).error(()=>{
-        if ($.isFunction(errorCallback)) {
+    }).error((e, a)=>{
+        if(a.xhr.status == "406" && $.isFunction(errorCallback)) {
+            errorCallback("重复录入门票");
+        } else if ($.isFunction(errorCallback)) {
             errorCallback("新增门票失败");
         }
     }).send();

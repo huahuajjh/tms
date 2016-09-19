@@ -69,7 +69,7 @@
                         <td colspan="5" class="text-right">
                             <page-temp
                                 :total-items="dataCount"
-                                :current-page="currentPage"
+                                :current-page.sync="query.pageIndex"
                                 :per-pages="query.pageSize"
                                 :change="reloadAsyncData"></page-temp>
                         </td>
@@ -93,7 +93,6 @@
             return {
                 dataList: [],
                 dataCount: 0,
-                currentPage: 1,
                 code: "",
                 name: "",
                 query: {

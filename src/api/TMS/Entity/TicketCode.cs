@@ -13,6 +13,7 @@ namespace Entity
         public DateTime PlayDate { get; set; } // PlayDate
         public string Code { get; set; } // Code
         public byte State { get; set; } // State
-        public bool IsCode { get; set; } // IsCode
+        public byte IsCode { get; set; } // IsCode
+        public string SmsContext { get; set; } // SMSContext
     }
 }

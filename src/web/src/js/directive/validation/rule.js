@@ -29,7 +29,7 @@ var ripv6 = /^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:
  * @return {boolean} 是否正确的时间格式
  */
 function isCorrectDate(value) {
-  var reg = /^(\d+)(-|[/])(\d{1,2})(-|[/])(\d{1,2}) ((\d{1,2}):(\d{1,2}):(\d{1,2})|(\d{1,2}):(\d{1,2})|(\d{1,2}))?$/;
+  var reg = /^(\d+)(-|[/])(\d{1,2})(-|[/])(\d{1,2})( (\d{1,2}):(\d{1,2}):(\d{1,2})|(\d{1,2}):(\d{1,2})|(\d{1,2}))?$/;
      var r = (value || "").match(reg);
      return r;
     //  if(r==null)return false;
@@ -92,7 +92,7 @@ module.exports = {
     }
   },
   "date": {
-    message: '必须符合日期格式 YYYY-MM-DD',
+    message: '必须符合日期格式 YYYY/MM/DD',
     action: function (value, attrValue , next, dm) {
       next(isCorrectDate(value) || !attrValue);
     }
