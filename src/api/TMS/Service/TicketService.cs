@@ -277,8 +277,10 @@ namespace Service
             List<string> repeatData = new List<string>();
             foreach (var ticket in tickets)
             {
-                string repeatKey = ticket.PlayTime.ToString("yyyy/MM/dd") + ticket.SceneryId.ToString() + ticket.IdCard;
-                if (repeatData.Contains(repeatKey)) { repeatList.Add(ticket); continue; }
+                string repeatKey = ticket.PlayTime.ToString("yyyy/MM/dd") + ticket.SceneryId.ToString() + ticket.IdCard.ToLower();
+                if (repeatData.Contains(repeatKey)) { 
+                    repeatList.Add(ticket); continue; 
+                }
                 repeatData.Add(repeatKey);
                 ticket.UserId = userId;
                 if (this.repository.GetReposirotyFactory<Entity.Ticket>().Query(d => d.PlayDate == ticket.PlayTime && d.SceneryId == ticket.SceneryId && d.IdCard == ticket.IdCard && d.IsDel == false).Any())

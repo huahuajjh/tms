@@ -31,20 +31,27 @@ namespace Library.Helper
         /// DES解密
         public static String Decrypt_DES(String str)
         {
-            if (string.IsNullOrEmpty(str)) return null;
-            System.Security.Cryptography.DESCryptoServiceProvider des = new System.Security.Cryptography.DESCryptoServiceProvider();
-            Int32 x;
-            Byte[] inputByteArray = new Byte[str.Length / 2];
-            for (x = 0; x < str.Length / 2; x++)
-                inputByteArray[x] = (Byte)(Convert.ToInt32(str.Substring(x * 2, 2), 16));
-            des.Key = System.Text.ASCIIEncoding.ASCII.GetBytes(strDesKey);
-            des.IV = System.Text.ASCIIEncoding.ASCII.GetBytes(strDesKey);
-            System.IO.MemoryStream ms = new System.IO.MemoryStream();
-            System.Security.Cryptography.CryptoStream cs = new System.Security.Cryptography.CryptoStream(ms, des.CreateDecryptor(), System.Security.Cryptography.CryptoStreamMode.Write);
-            cs.Write(inputByteArray, 0, inputByteArray.Length);
-            cs.FlushFinalBlock();
-            System.Text.StringBuilder ret = new System.Text.StringBuilder();
-            return System.Text.Encoding.Default.GetString(ms.ToArray());
+            try
+            {
+                if (string.IsNullOrEmpty(str)) return null;
+                System.Security.Cryptography.DESCryptoServiceProvider des = new System.Security.Cryptography.DESCryptoServiceProvider();
+                Int32 x;
+                Byte[] inputByteArray = new Byte[str.Length / 2];
+                for (x = 0; x < str.Length / 2; x++)
+                    inputByteArray[x] = (Byte)(Convert.ToInt32(str.Substring(x * 2, 2), 16));
+                des.Key = System.Text.ASCIIEncoding.ASCII.GetBytes(strDesKey);
+                des.IV = System.Text.ASCIIEncoding.ASCII.GetBytes(strDesKey);
+                System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                System.Security.Cryptography.CryptoStream cs = new System.Security.Cryptography.CryptoStream(ms, des.CreateDecryptor(), System.Security.Cryptography.CryptoStreamMode.Write);
+                cs.Write(inputByteArray, 0, inputByteArray.Length);
+                cs.FlushFinalBlock();
+                System.Text.StringBuilder ret = new System.Text.StringBuilder();
+                return System.Text.Encoding.Default.GetString(ms.ToArray());
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }
